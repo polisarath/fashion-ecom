@@ -22,7 +22,7 @@ const createPaymentLink= async (orderId)=>{
             email: true,
           },
           reminder_enable: true,
-          callback_url: `http://localhost:3001/payment/${orderId}`,
+          callback_url: `https://fashion-ecom.onrender.com//${orderId}`,
           callback_method: 'get',
         };
     
