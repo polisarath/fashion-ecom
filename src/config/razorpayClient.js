@@ -3,7 +3,7 @@ require('dotenv').config();
 const apiKey=process.env.apiKey
 const apiSecret=process.env.apiSecret
 
-const razorpay = new Razorpay({
+ const razorpay = new Razorpay({
     key_id: apiKey,
     key_secret: apiSecret,
   });

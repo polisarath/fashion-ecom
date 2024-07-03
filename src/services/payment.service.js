@@ -22,7 +22,7 @@ const createPaymentLink= async (orderId)=>{
             email: true,
           },
           reminder_enable: true,
-          callback_url: `https://codewithzosh-ecommerce-mern.vercel.app/payment/${orderId}`,
+          callback_url: `http://localhost:3001/payment/${orderId}`,
           callback_method: 'get',
         };
     
@@ -30,9 +30,6 @@ const createPaymentLink= async (orderId)=>{
     
         const paymentLinkId = paymentLink.id;
         const payment_link_url = paymentLink.short_url;
-    
-     
-    
         // Return the payment link URL and ID in the response
         const resData = {
           paymentLinkId: paymentLinkId,
@@ -52,20 +49,14 @@ const updatePaymentInformation=async(reqData)=>{
   try {
     // Fetch order details (You will need to implement the 'orderService.findOrderById' function)
     const order = await orderService.findOrderById(orderId);
-
     // Fetch the payment details using the payment ID
     const payment = await razorpay.payments.fetch(paymentId);
   
 
     if (payment.status === 'captured') {
-     
-
       order.paymentDetails.paymentId=paymentId;
       order.paymentDetails.status='COMPLETED'; 
       order.orderStatus='PLACED';
-     
-
-     
       await order.save()
     }
     console.log( 'payment status',order);
